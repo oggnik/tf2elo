@@ -26,3 +26,4 @@ class Team:
         self.matches_for = 0
         self.matches_against = 0
         self.elo = 1500
+        self.num_playoffs = 0

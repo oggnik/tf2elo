@@ -2,11 +2,13 @@ import copy
 import csv
 from dateutil.parser import parse
 import math
+import numpy as np
 import sys
 
 from model import *
 
 K = 45.0
+num_simulations = 1000
 
 starting_elos = {
     'froyotech': 1500.0,
@@ -80,7 +82,44 @@ def calculate_elo(matches, teams, print_changes = False):
             if print_changes: dump_elos(teams)
 
 def simulate_season(orig_matches, orig_teams):
-    pass
+    for i in range(0, num_simulations):
+        # We don't want to modify originals
+        matches = copy.deepcopy(orig_matches)
+        teams = copy.deepcopy(orig_teams)
+
+        for match in matches:
+            if match.completed: continue
+            team1 = teams[match.team1]
+            team2 = teams[match.team2]
+
+            Q1 = math.pow(10.0, team1.elo / 400.0)
+            Q2 = math.pow(10.0, team2.elo / 400.0)
+            # Calculate expected value
+            E1 = Q1 / (Q1 + Q2)
+            E2 = Q2 / (Q1 + Q2)
+
+            r = np.random.uniform()
+            if r < E1:
+                # Team 1 won
+                match.set_scores(5, 0)
+                team1.matches_for += 1
+                team2.matches_against += 1
+            else:
+                # Team 2 won
+                match.set_scores(0, 5)
+                team2.matches_for += 1
+                team1.matches_against += 1
+            
+            # Update elos to match results
+            t1_elo, t2_elo = update_elos(team1.elo, team2.elo, match.t1_prob, match.t2_prob)
+            team1.elo = t1_elo
+            team2.elo = t2_elo
+        
+        teams_sorted = sorted(teams.values(), key = lambda team: team.matches_for, reverse = True)
+        for team in teams_sorted[:4]:
+            orig_teams[team.name].num_playoffs += 1
+
+            
 
 if __name__ == "__main__":
     if (len(sys.argv) != 2):
@@ -96,3 +135,6 @@ if __name__ == "__main__":
     
     print('=======================')
     simulate_season(matches, teams)
+    playoffs_sorted = sorted(teams.values(), key = lambda team: team.num_playoffs, reverse = True)
+    for team in elo_sorted:
+        print(team.name, team.num_playoffs / num_simulations, team.num_playoffs)
