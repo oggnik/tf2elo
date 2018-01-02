@@ -164,7 +164,8 @@ if __name__ == "__main__":
     print('\n===Playoff Percentage===')
     playoffs_sorted = sorted(teams.values(), key = lambda team: team.num_playoffs, reverse = True)
     for team in playoffs_sorted:
-        print(team.name, team.num_playoffs * 100.0 / num_simulations)
+        # print(team.name, team.num_playoffs * 100.0 / num_simulations)
+        print('<tr><td>%s</td><td>%.0f%%</td></tr>' % (team.name, team.num_playoffs * 100.0 / num_simulations))
     
     # print('\n====Next Season Elo====')
     # nelo_sorted = sorted(teams.values(), key = lambda team: team.next_season_elo, reverse = True)

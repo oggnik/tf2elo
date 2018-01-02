@@ -1,0 +1,84 @@
+
+body {
+    background-color: gray;
+}
+
+.menu {
+    background-color: #F3A957;
+}
+
+
+.week {
+    background-color: #695344;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+}
+.week-title {
+    font-size: 2em;
+    text-align: center;
+    color:#dbdbdb;
+}
+
+
+.playoffs-title {
+    font-size: 1.5em;
+    text-align: center;
+    margin-top: 0.5em;
+    color: #dbdbdb;
+}
+.playoffs-table {
+    margin-bottom: 0.5em;
+    background-color: darkgray;
+}
+.playoffs-table thead {
+    color: #dbdbdb;
+    background-color: #525252;
+}
+
+.matches-title {
+    font-size: 1.5em;
+    text-align: center;
+    margin-top: 0.5em;
+    color: #dbdbdb;
+}
+
+.match {
+    background-color: darkgray;
+    margin-top: 0.25em;
+    margin-bottom: 0.25em;
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+    padding-bottom: 15px;
+    padding-top: 5px;
+    border-radius: 10px;
+}
+.match-text {
+    padding-left: 1em;
+    padding-right: 1em;
+}
+.match-date {
+    text-align: center;
+    color: #42342e;
+}
+
+.team1 {
+    text-align: left;
+    color: #283d4d;
+}
+.team2 {
+    text-align: right;
+    color: #7c2727;
+}
+
+.prob {
+    height: 5px;
+}
+.team1-prob {
+    background-color: #99C2D8;
+}
+.team2-prob {
+    background-color: #FB524F;
+}
