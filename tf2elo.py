@@ -7,7 +7,7 @@ import sys
 
 from model import *
 
-K = 45.0
+K = 35.0
 num_simulations = 1000
 
 starting_elos = {
@@ -136,5 +136,5 @@ if __name__ == "__main__":
     print('=======================')
     simulate_season(matches, teams)
     playoffs_sorted = sorted(teams.values(), key = lambda team: team.num_playoffs, reverse = True)
-    for team in elo_sorted:
-        print(team.name, team.num_playoffs / num_simulations, team.num_playoffs)
+    for team in playoffs_sorted:
+        print(team.name, team.num_playoffs * 100.0 / num_simulations)
