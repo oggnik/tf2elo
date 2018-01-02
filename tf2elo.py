@@ -40,6 +40,7 @@ def read_season(filename):
                 m = Match(match['Home'], match['Away'], match['Map'], date)
                 scores = match['Score'].split('-')
                 m.set_scores(int(scores[0]), int(scores[1]))
+                m.orig_completed = True
             matches.append(m)
     matches.sort(key = lambda match: match.date)
     teams = {}
@@ -85,11 +86,10 @@ def calculate_elo(matches, teams, print_changes = False):
 def simulate_season(orig_matches, orig_teams):
     for i in tqdm(range(0, num_simulations), desc = 'Simulating season'):
         # We don't want to modify originals
-        matches = copy.deepcopy(orig_matches)
         teams = copy.deepcopy(orig_teams)
 
         for match in matches:
-            if match.completed: continue
+            if match.orig_completed: continue
             team1 = teams[match.team1]
             team2 = teams[match.team2]
 

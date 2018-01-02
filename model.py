@@ -5,6 +5,7 @@ class Match:
         self.team2 = team2
         self.date = date
         self.completed = False
+        self.orig_completed = False
         self.team1_score = 0
         self.team2_score = 0
         self.winner = ''
