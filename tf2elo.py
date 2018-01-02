@@ -12,8 +12,15 @@ K = 35.0
 num_simulations = 10000
 
 starting_elos = {
-    'froyotech': 1500.0,
-    'Ascent': 1500.0,
+    # 'froyotech': 1637.883823,
+    # 'Ascent': 1595.387592,
+    # 'SVIFT NA': 1533.208293,
+    # 'Velocity eSports TF2': 1525.354096,
+    # 'woodpig quantum': 1522.659128,
+    # 'Feint Gaming': 1459.309800,
+    # 'black swan': 1440.162811,
+    # 'The Sparkle Gang': 1405.528499,
+    # 'Cat Noises': 1380.505958,
 }
 
 def update_elos(t1_elo, t2_elo, t1_prob, t2_prob):
@@ -120,7 +127,24 @@ def simulate_season(orig_matches, orig_teams):
         for team in teams_sorted[:4]:
             orig_teams[team.name].num_playoffs += 1
 
-            
+def set_match_probs(matches, teams):
+    for match in matches:
+        if match.orig_completed: continue
+        team1 = teams[match.team1]
+        team2 = teams[match.team2]
+
+        Q1 = math.pow(10.0, team1.elo / 400.0)
+        Q2 = math.pow(10.0, team2.elo / 400.0)
+        # Calculate expected value
+        E1 = Q1 / (Q1 + Q2)
+        E2 = Q2 / (Q1 + Q2)
+
+        match.t1_prob = E1
+        match.t2_prob = E2
+
+def calculate_next_season_start_elos(teams):
+    for team in teams.values():
+       team.next_season_elo = (team.elo - 1500) * .66 + 1500
 
 if __name__ == "__main__":
     if (len(sys.argv) != 2):
@@ -129,13 +153,24 @@ if __name__ == "__main__":
 
     calculate_elo(matches, teams)
     simulate_season(matches, teams)
+    set_match_probs(matches, teams)
+    calculate_next_season_start_elos(teams)
 
-    print('\n=====Starting Elos=====')
+    print('\n======Current Elos======')
     elo_sorted = sorted(teams.values(), key = lambda team: team.elo, reverse = True)
     for team in elo_sorted:
         print(team.name, team.elo, team.matches_for, team.matches_against)
-    
+
     print('\n===Playoff Percentage===')
     playoffs_sorted = sorted(teams.values(), key = lambda team: team.num_playoffs, reverse = True)
     for team in playoffs_sorted:
         print(team.name, team.num_playoffs * 100.0 / num_simulations)
+    
+    # print('\n====Next Season Elo====')
+    # nelo_sorted = sorted(teams.values(), key = lambda team: team.next_season_elo, reverse = True)
+    # for team in nelo_sorted:
+    #     print('\'%s\': %f,' % (team.name, team.next_season_elo))
+
+    # print('\n==Match Probabilities==')
+    # for match in matches:
+    #     print(match.date, match.team1, match.t1_prob, match.team2, match.t2_prob)

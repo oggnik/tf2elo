@@ -28,3 +28,4 @@ class Team:
         self.matches_against = 0
         self.elo = 1500
         self.num_playoffs = 0
+        self.next_season_elo = 1500
