@@ -4,11 +4,12 @@ from dateutil.parser import parse
 import math
 import numpy as np
 import sys
+from tqdm import tqdm
 
 from model import *
 
 K = 35.0
-num_simulations = 1000
+num_simulations = 10000
 
 starting_elos = {
     'froyotech': 1500.0,
@@ -69,7 +70,7 @@ def dump_elos(teams):
 
 def calculate_elo(matches, teams, print_changes = False):
     if print_changes: dump_elos(teams)
-    for match in matches:
+    for match in tqdm(matches, desc = 'Calculating elos'):
         if match.completed:
             team1 = teams[match.team1]
             team2 = teams[match.team2]
@@ -82,7 +83,7 @@ def calculate_elo(matches, teams, print_changes = False):
             if print_changes: dump_elos(teams)
 
 def simulate_season(orig_matches, orig_teams):
-    for i in range(0, num_simulations):
+    for i in tqdm(range(0, num_simulations), desc = 'Simulating season'):
         # We don't want to modify originals
         matches = copy.deepcopy(orig_matches)
         teams = copy.deepcopy(orig_teams)
@@ -127,14 +128,14 @@ if __name__ == "__main__":
     matches, teams = read_season(sys.argv[1])
 
     calculate_elo(matches, teams)
+    simulate_season(matches, teams)
 
-    print('=======================')
+    print('\n=====Starting Elos=====')
     elo_sorted = sorted(teams.values(), key = lambda team: team.elo, reverse = True)
     for team in elo_sorted:
         print(team.name, team.elo, team.matches_for, team.matches_against)
     
-    print('=======================')
-    simulate_season(matches, teams)
+    print('\n===Playoff Percentage===')
     playoffs_sorted = sorted(teams.values(), key = lambda team: team.num_playoffs, reverse = True)
     for team in playoffs_sorted:
         print(team.name, team.num_playoffs * 100.0 / num_simulations)
