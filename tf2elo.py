@@ -1,3 +1,4 @@
+import copy
 import csv
 from dateutil.parser import parse
 import math
@@ -78,6 +79,9 @@ def calculate_elo(matches, teams, print_changes = False):
             
             if print_changes: dump_elos(teams)
 
+def simulate_season(orig_matches, orig_teams):
+    pass
+
 if __name__ == "__main__":
     if (len(sys.argv) != 2):
         print('Usage: python3 tf2elo.py season_file.csv')
@@ -91,3 +95,4 @@ if __name__ == "__main__":
         print(team.name, team.elo, team.matches_for, team.matches_against)
     
     print('=======================')
+    simulate_season(matches, teams)
