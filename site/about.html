@@ -31,7 +31,13 @@
                 <h2>About</h2>
                 <p>This site gives week by week predictions for upcoming ESEA TF2 Invite matches.  It also gives predictions for each team to make it into the playoffs.  This project was inspired by <a href="http://fivethirtyeight.com/">FiveThirtyEight</a>'s <a href="https://projects.fivethirtyeight.com/2018-nba-predictions/">sports predictions</a>.</p>
                 <h2>Methodology</h2>
-                <p>An <a href="https://en.wikipedia.org/wiki/Elo_rating_system">Elo score</a> is calculated for each team based on their previous matches.  Using these scores the probability of winning each week's matches is computed.  These probabilities are currently fairly conservative.</p>
+                <p>An <a href="https://en.wikipedia.org/wiki/Elo_rating_system">Elo score</a> is calculated for each team based on their previous matches.
+                    Using these scores the probability of winning each week's matches is computed.
+                    These probabilities are currently fairly conservative as scores were only calculated starting for season 26.
+                    To make up ESEA seasons having few matches, a high K factor is used (35).
+                    This makes the Elo scores more dependent on recent matches.
+                    Additionally, new teams are assigned a starting score of 1500.  Existing teams use their previous season's elo score which has been reverted slightly towards 1500.
+                </p>
                 <p>Furthermore, the rest of the season is simulated 10,000 times.  For each simulation the top four teams are recorded as making it to the playoffs.  Using these statistics the chance that each team makes it to the playoffs is computed.</p>
             </div>
         </div>
