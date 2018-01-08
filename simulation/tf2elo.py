@@ -7,9 +7,10 @@ import sys
 from tqdm import tqdm
 
 from model import *
+from printer import *
 
 K = 35.0
-num_simulations = 10000
+num_simulations = 100#00
 
 starting_elos = {
     # 'froyotech': 1637.883823,
@@ -147,8 +148,9 @@ def calculate_next_season_start_elos(teams):
        team.next_season_elo = (team.elo - 1500) * .66 + 1500
 
 if __name__ == "__main__":
-    if (len(sys.argv) != 2):
-        print('Usage: python3 tf2elo.py season_file.csv')
+    if (len(sys.argv) != 3):
+        print('Usage: python3 tf2elo.py season_file.csv week_number')
+        exit(1)
     matches, teams = read_season(sys.argv[1])
 
     calculate_elo(matches, teams)
@@ -164,9 +166,8 @@ if __name__ == "__main__":
     print('\n===Playoff Percentage===')
     playoffs_sorted = sorted(teams.values(), key = lambda team: team.num_playoffs, reverse = True)
     for team in playoffs_sorted:
-        # print(team.name, team.num_playoffs * 100.0 / num_simulations)
-        print('<tr><td>%s</td><td>%.0f</td><td>%.0f%%</td></tr>' % (team.name, team.elo, team.num_playoffs * 100.0 / num_simulations))
-    
+        print(team.name, team.num_playoffs * 100.0 / num_simulations)
+
     # print('\n====Next Season Elo====')
     # nelo_sorted = sorted(teams.values(), key = lambda team: team.next_season_elo, reverse = True)
     # for team in nelo_sorted:
@@ -175,3 +176,6 @@ if __name__ == "__main__":
     # print('\n==Match Probabilities==')
     # for match in matches:
     #     print(match.date, match.team1, match.t1_prob, match.team2, match.t2_prob)
+
+    # Write the html output
+    write_week(matches, teams, num_simulations, sys.argv[2], 'week_template.html', 'out.html')
