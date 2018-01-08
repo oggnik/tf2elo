@@ -158,6 +158,9 @@ if __name__ == "__main__":
     set_match_probs(matches, teams)
     calculate_next_season_start_elos(teams)
 
+    # Write the html output
+    write_week(matches, teams, num_simulations, sys.argv[2], 'week_template.html', 'out.html')
+
     print('\n======Current Elos======')
     elo_sorted = sorted(teams.values(), key = lambda team: team.elo, reverse = True)
     for team in elo_sorted:
@@ -176,6 +179,3 @@ if __name__ == "__main__":
     # print('\n==Match Probabilities==')
     # for match in matches:
     #     print(match.date, match.team1, match.t1_prob, match.team2, match.t2_prob)
-
-    # Write the html output
-    write_week(matches, teams, num_simulations, sys.argv[2], 'week_template.html', 'out.html')
