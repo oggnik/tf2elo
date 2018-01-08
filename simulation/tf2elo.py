@@ -161,7 +161,7 @@ if __name__ == "__main__":
     print('\n======Current Elos======')
     elo_sorted = sorted(teams.values(), key = lambda team: team.elo, reverse = True)
     for team in elo_sorted:
-        print(team.name, team.elo, team.matches_for, team.matches_against)
+        print('%s %.0f %d %d' % (team.name, team.elo, team.matches_for, team.matches_against))
 
     print('\n===Playoff Percentage===')
     playoffs_sorted = sorted(teams.values(), key = lambda team: team.num_playoffs, reverse = True)
