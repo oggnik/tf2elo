@@ -101,3 +101,4 @@ ENV/
 
 simulation/out.html
 serverinfo.txt
+letsencrypt
