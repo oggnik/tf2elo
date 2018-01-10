@@ -97,4 +97,7 @@ ENV/
 # mypy
 .mypy_cache/
 
+*.DS_Store
+
 simulation/out.html
+serverinfo.txt
