@@ -20,7 +20,7 @@ starting_elos = {
     'woodpig quantum': 1522.659128,
     'Feint Gaming': 1459.309800,
     'black swan': 1440.162811,
-    'The Sparkle Gang': 1405.528499,
+    'TFCrew': 1405.528499,
     'Cat Noises': 1380.505958,
 }
 
