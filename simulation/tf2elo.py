@@ -118,11 +118,9 @@ def simulate_season(orig_matches, orig_teams):
                 match.set_scores(0, 5)
                 team2.matches_for += 1
                 team1.matches_against += 1
-            
-            # Update elos to match results
-            t1_elo, t2_elo = update_elos(team1.elo, team2.elo, match.t1_prob, match.t2_prob)
-            team1.elo = t1_elo
-            team2.elo = t2_elo
+        
+        for team in teams:
+            teams[team].matches_for += np.random.uniform(0, 0.01)
         
         teams_sorted = sorted(teams.values(), key = lambda team: team.matches_for, reverse = True)
         for team in teams_sorted[:4]:
