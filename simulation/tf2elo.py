@@ -13,15 +13,15 @@ K = 35.0
 num_simulations = 10000
 
 starting_elos = {
-    # 'froyotech': 1637.883823,
-    # 'Ascent': 1595.387592,
-    # 'SVIFT NA': 1533.208293,
-    # 'Velocity eSports TF2': 1525.354096,
-    # 'woodpig quantum': 1522.659128,
-    # 'Feint Gaming': 1459.309800,
-    # 'black swan': 1440.162811,
-    # 'The Sparkle Gang': 1405.528499,
-    # 'Cat Noises': 1380.505958,
+    'froyotech': 1637.883823,
+    'Ascent': 1595.387592,
+    'SVIFT NA': 1533.208293,
+    'Velocity eSports TF2': 1525.354096,
+    'woodpig quantum': 1522.659128,
+    'Feint Gaming': 1459.309800,
+    'black swan': 1440.162811,
+    'The Sparkle Gang': 1405.528499,
+    'Cat Noises': 1380.505958,
 }
 
 def update_elos(t1_elo, t2_elo, t1_prob, t2_prob):
