@@ -119,6 +119,8 @@ def simulate_season(orig_matches, orig_teams):
                 team2.matches_for += 1
                 team1.matches_against += 1
         
+        # Slightly perturb the matches for to prevent perfect ties from happening.
+        # This takes ties and effectively picks a random winner.
         for team in teams:
             teams[team].matches_for += np.random.uniform(0, 0.01)
         
