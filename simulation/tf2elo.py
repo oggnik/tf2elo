@@ -18,7 +18,7 @@ starting_elos = {
     'SVIFT NA': 1533.208293,
     'Velocity eSports TF2': 1525.354096,
     'woodpig quantum': 1522.659128,
-    'Feint Gaming': 1459.309800,
+    'MyAnimeList': 1459.309800,
     'black swan': 1440.162811,
     'TFCrew': 1405.528499,
     'Cat Noises': 1380.505958,
