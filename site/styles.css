@@ -7,6 +7,12 @@ body {
     background-color: #F3A957;
 }
 
+.menu-update-date {
+    float: right;
+}
+.menu-update-date li {
+    text-transform: none;
+}
 
 .week {
     background-color: #695344;
