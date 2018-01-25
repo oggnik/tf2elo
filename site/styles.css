@@ -3,6 +3,14 @@ body {
     background-color: gray;
 }
 
+footer {
+    color: #dbdbdb;
+    text-align: center;
+    background-color: #58463a;
+    padding: 5px;
+    margin-top: 10px;
+}
+
 .menu {
     background-color: #F3A957;
 }
