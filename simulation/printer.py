@@ -6,7 +6,12 @@ def write_week(matches, teams, num_simulations, week_number, template_name, outf
     elo_table = ''
     elo_sorted = sorted(teams.values(), key = lambda team: team.elo, reverse = True)
     for team in elo_sorted:
-        elo_table += '<tr><td>%s</td><td>%.0f</td><td>%.0f%%</td></tr>' % (team.name, team.elo, team.num_playoffs * 100.0 / num_simulations)
+        if team.num_playoffs * 100.0 / num_simulations > 99.5:
+            elo_table += '<tr><td>%s</td><td>%.0f</td><td>&gt; 99%%</td></tr>' % (team.name, team.elo)
+        elif team.num_playoffs * 100.0 / num_simulations < 0.5:
+            elo_table += '<tr><td>%s</td><td>%.0f</td><td>&lt; 0%%</td></tr>' % (team.name, team.elo)
+        else:
+            elo_table += '<tr><td>%s</td><td>%.0f</td><td>%.0f%%</td></tr>' % (team.name, team.elo, team.num_playoffs * 100.0 / num_simulations)
 
     match_html = ''
     end_week = datetime.datetime.today()
