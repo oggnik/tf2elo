@@ -10,7 +10,7 @@ from model import *
 from printer import *
 
 K = 35.0
-num_simulations = 10000
+num_simulations = 500000
 
 starting_elos = {
     'froyotech': 1637.883823,
