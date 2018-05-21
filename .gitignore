@@ -99,6 +99,8 @@ ENV/
 
 *.DS_Store
 
+.vscode/
+
 simulation/out.html
 serverinfo.txt
 letsencrypt
