@@ -15,6 +15,10 @@ footer {
     background-color: #F3A957;
 }
 
+.menu li {
+    background-color: #F3A957;
+}
+
 .menu-update-date {
     float: right;
 }
