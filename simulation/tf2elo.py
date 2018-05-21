@@ -10,18 +10,18 @@ from model import *
 from printer import *
 
 K = 35.0
-num_simulations = 10000
+num_simulations = 100000
 
 starting_elos = {
-    'froyotech': 1637.883823,
-    'Ascent': 1595.387592,
-    'SVIFT NA': 1533.208293,
-    'Velocity eSports TF2': 1525.354096,
-    'woodpig quantum': 1522.659128,
-    'MyAnimeList': 1459.309800,
-    'black swan': 1440.162811,
-    'TFCrew': 1405.528499,
-    'Cat Noises': 1380.505958,
+    'froyotech': 1680.521587,
+    'SVIFT NA': 1602.111366,
+    'Ascent': 1591.239918,
+    'Velocity eSports TF2': 1542.944465,
+    'Running with Scizors': 1504.655047,
+    'MyAnimeList': 1477.129240,
+    'black swan': 1417.368989,
+    'TFCrew': 1378.477742,
+    'Hooligans For Hire': 1369.462689,
 }
 
 def update_elos(t1_elo, t2_elo, t1_prob, t2_prob):
