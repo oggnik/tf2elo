@@ -1,6 +1,5 @@
 import datetime
 import sys
-from model import *
 
 def write_week(matches, teams, num_simulations, week_number, template_name, outfile_name):
     elo_table = ''

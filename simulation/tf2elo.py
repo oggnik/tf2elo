@@ -70,6 +70,10 @@ def read_season(filename):
             team2.matches_for += 1
             team1.matches_against += 1
 
+    # Reset matches back to their original values
+    for team in teams.values():
+        team.finalize_matches()
+
     return matches, teams
 
 def dump_elos(teams):
@@ -93,8 +97,8 @@ def calculate_elo(matches, teams, print_changes = False):
 
 def simulate_season(orig_matches, orig_teams):
     for i in tqdm(range(0, num_simulations), desc = 'Simulating season'):
-        # We don't want to modify originals
-        teams = copy.deepcopy(orig_teams)
+        for team in orig_teams.values():
+            team.reset_matches()
 
         for match in matches:
             if match.orig_completed: continue
@@ -121,12 +125,15 @@ def simulate_season(orig_matches, orig_teams):
         
         # Slightly perturb the matches for to prevent perfect ties from happening.
         # This takes ties and effectively picks a random winner.
-        for team in teams:
-            teams[team].matches_for += np.random.uniform(0, 0.01)
+        for team in orig_teams:
+            orig_teams[team].matches_for += np.random.uniform(0, 0.01)
         
-        teams_sorted = sorted(teams.values(), key = lambda team: team.matches_for, reverse = True)
+        teams_sorted = sorted(orig_teams.values(), key = lambda team: team.matches_for, reverse = True)
         for team in teams_sorted[:4]:
             orig_teams[team.name].num_playoffs += 1
+
+    for team in orig_teams.values():
+        team.reset_matches()
 
 def set_match_probs(matches, teams):
     for match in matches:

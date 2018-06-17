@@ -26,6 +26,16 @@ class Team:
         self.name = name
         self.matches_for = 0
         self.matches_against = 0
+        self.orig_matches_for = 0
+        self.orig_matches_against = 0
         self.elo = 1500
         self.num_playoffs = 0
         self.next_season_elo = 1500
+
+    def finalize_matches(self):
+        self.orig_matches_for = self.matches_for
+        self.orig_matches_against = self.matches_against
+
+    def reset_matches(self):
+        self.matches_for = self.orig_matches_for
+        self.matches_against = self.orig_matches_against
