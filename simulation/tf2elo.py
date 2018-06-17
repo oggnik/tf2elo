@@ -1,4 +1,3 @@
-import copy
 import csv
 from dateutil.parser import parse
 import math
